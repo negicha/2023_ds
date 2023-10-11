@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>爆弾ゲーム</title>
+</head>
+<body>
+    <h1>爆弾ゲーム</h1>
+    <p>0から2の数を選んで、正しい位置を当ててください。</p>
+
+    <div id="game">
+        <button id="guessButton">予想</button>
+        <input type="number" id="guessInput" min="0" max="2">
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const targetPosition = Math.floor(Math.random() * 3); // 爆弾の位置（0から2の乱数）
+        let attempts = 0;
+
+        const guessButton = document.getElementById('guessButton');
+        const guessInput = document.getElementById('guessInput');
+        const message = document.getElementById('message');
+
+        guessButton.addEventListener('click', checkGuess);
+
+        function checkGuess() {
+            const userGuess = parseInt(guessInput.value);
+
+            if (userGuess === targetPosition) {
+                message.textContent = '爆弾を見つけました！';
+                guessButton.disabled = true;
+                guessInput.disabled = true;
+            } else {
+                attempts++;
+                message.textContent = `違います。 ${attempts}回目の試行です。`;
+            }
+        }
+    </script>
+</body>
+</html>
